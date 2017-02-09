@@ -1,6 +1,5 @@
-
 """
-server.py implements the server interface layer between the android client and the Neural networ
+server.py implements the server interface layer between the android client and the Neural network
 """
 
 from flask import Flask
