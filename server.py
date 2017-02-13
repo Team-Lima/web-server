@@ -6,7 +6,7 @@ from flask import Flask
 import json #file for parsing JSON
 import helper #file of helper functions for constructing the JSON messages
 
-
+#the flask application object
 app = Flask(__name__)
 
 """
