@@ -23,10 +23,3 @@ def caption_res(success, status, text, confidence, improvement_tips):
         }
     }
 
-
-def caption_req(json_data):
-    """
-    :param json_data: a text string representing the json data passed to the server from the client
-    :return: the JSON object associated with the text string
-    """
-    return
