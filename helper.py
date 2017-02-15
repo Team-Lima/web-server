@@ -2,7 +2,6 @@
 helper.py contains the helper functions which aid in request decoding and response construction
 """
 
-
 def caption_res(success, status, text, confidence, improvement_tips):
     """
     :param success:
@@ -22,4 +21,5 @@ def caption_res(success, status, text, confidence, improvement_tips):
             "improvementTips": improvement_tips
         }
     }
+
 
