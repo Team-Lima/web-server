@@ -10,7 +10,7 @@ from flask import Request
 # file for parsing JSON
 import json
 # file of helper functions for constructing the JSON messages
-import helper
+import server_util_functions
 
 
 # the flask application object
@@ -40,11 +40,13 @@ def caption():
 
 def send_image(image):
     """
+    a function to send the image data to the Neural network for classification and returns the caption string
+
     :param image: The base64 string representation of the image
     :return: A JSON response representing a textual description of the image classified by the Neural Network
     """
-    
-    return helper.caption_res(True, 0, "a thing of some sort...", 1.0, [])
+
+
 
 if __name__ == "__main__":
     app.run()
