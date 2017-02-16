@@ -10,8 +10,9 @@ import server_util_functions
 def process_image(img):
     """
         Processes the image and runs the nn and image processing on two different threads
-    :param img:     the image as a base64 string
-    :return: The JSON response object containing the HTTP success status/code, the image caption, the confidence interval and the list of error corrections
+    :param img:     The image as a base64 string
+    :return:        The JSON response object containing the HTTP success status/code, the image caption, the confidence interval
+                    and the list of error corrections
     """
 
     # Getting the image from b64 to a 'bytes' object

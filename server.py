@@ -9,8 +9,8 @@ from flask import Request
 
 # file for parsing JSON
 import json
-# file of helper functions for constructing the JSON messages
-import server_util_functions
+# file containing the image processing code
+import run
 
 
 # the flask application object
@@ -24,28 +24,21 @@ Version 1 of the caption generation api - will return a caption for a given proc
 @app.route("/v1/caption", methods=['POST'])
 def caption():
     """
-    :return:
+    function which is called by the HTTP POST request sent in by the client which returns a JSON string representing
+    the classification result from the Neural Network
+
+    :return: The JSON response formatted from the dictionary returned in process_image
     """
     if Request.method == 'POST':
         # request from the application should be a JSON object of the form:
         json_req = Request.json
 
         # send the data to the Neural network server
-        result = send_image(json_req['data'])
+        result = run.process_image(json_req['data'])
 
         js = json.dumps(result)
         resp = Response(js, status=200, mimetype="application/json")
         return resp
-
-
-def send_image(image):
-    """
-    a function to send the image data to the Neural network for classification and returns the caption string
-
-    :param image: The base64 string representation of the image
-    :return: A JSON response representing a textual description of the image classified by the Neural Network
-    """
-
 
 
 if __name__ == "__main__":
