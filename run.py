@@ -24,7 +24,7 @@ def process_image(img):
     # TODO: Determine the error corrections to be made to the image in the event of a low confidence interval returned
 
     # Return the JSON object collecting all the data from the Neural Network
-    return server_util_functions.caption_res(True, 0, "a thing of some sort...", 1.0, [])
+    return server_util_functions.caption_res(True, 0, caption, prob, [])
 
 
 
