@@ -46,7 +46,17 @@ class Vocabulary(object):
 
     with tf.gfile.GFile(vocab_file, mode="r") as f:
       reverse_vocab = list(f.readlines())
+    reverse_vocab = [line.replace("b'","")
+                     for line in
+                        [
+                            l.replace("' ", " ") for l in reverse_vocab
+                     ]
+            ]
+    print(reverse_vocab[0])
+    #reverse_vocab = [line.decode() for line in reverse_vocab]
     reverse_vocab = [line.split()[0] for line in reverse_vocab]
+    print(type(reverse_vocab[0]))
+    print(type(start_word))
     assert start_word in reverse_vocab
     assert end_word in reverse_vocab
     if unk_word not in reverse_vocab:

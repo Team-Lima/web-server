@@ -2,29 +2,44 @@
     Runs the neural network and the image processing result
 """
 
-from im2txt.im2txt import modified_run as nn_run
+from im2txt import run_inference as nn_run
 import base64 as b64
-import server_util_functions
+import _thread as thread
 
-
-def process_image(img):
+class ImageProcessor:
     """
-        Processes the image and runs the nn and image processing on two different threads
-    :param img:     The image as a base64 string
-    :return:        The JSON response object containing the HTTP success status/code, the image caption, the confidence interval
-                    and the list of error corrections
+        Class that represents the image processor
     """
 
-    # Getting the image from b64 to a 'bytes' object
-    bytes_img = b64.b64decode(img)
+    def __init__(self, img):
+        """
 
-    # running the nn
-    caption, prob = nn_run.run(bytes_img)
+        :param img:     The image to be processed, as a base64 string
+        """
+        self._b64_img = str(img)
+        self.result = dict()
 
-    # TODO: Determine the error corrections to be made to the image in the event of a low confidence interval returned
+    def _get_caption(self):
+        """
+            Inner function that calls the neural network and
+        :return:    -
+        """
+        try:
+            # Getting the image from b64 to a 'bytes' object
+            bytes_img = b64.b64decode(self._b64_img)
+            print(bytes_img)
+            # running the nn
+            caption, prob = nn_run.predict(bytes_img)
+        except Exception:
+            # Should not be the case, but just to be safe
+            print("The neural network failed!")
+            #TODO: Figure out what the defined behaviour should be here
 
-    # Return the JSON object collecting all the data from the Neural Network
-    return server_util_functions.caption_res(True, 0, caption, prob, [])
-
+    def _get_image_faults(self):
+        """
+            Inner function that calls the actual image processor and gets the feedback from it
+        :return:        -
+        """
+        #TODO: 
 
 

@@ -83,6 +83,8 @@ py_binary(
     ],
 )
 
+
+
 py_binary(
     name = "run_inference",
     srcs = ["run_inference.py"],
@@ -93,4 +95,14 @@ py_binary(
         "//im2txt/inference_utils:caption_generator",
         "//im2txt/inference_utils:vocabulary",
     ],
+py_binary(
+            name = "modified_run",
+                srcs = ["modified_run.py"],
+                    srcs_version = "PY2AND3",
+                        deps = [ 
+                                        ":configuration",
+                                        ":inference_wrapper",
+                                        "//im2txt/inference_utils:caption_generator",
+                                        "//im2txt/inference_utils:vocabulary",
+                                    ],
 )
