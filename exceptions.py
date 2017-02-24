@@ -32,7 +32,7 @@ class NeuralNetworkFailure(ImageException):
             CONSTRUCTOR
         :param id:      The id of the image that caused problems to the nn
         """
-        super(id)
+        super.__init__(id)
         self._msg = "The neural network failed!"
 
     def __str__(self):
@@ -49,7 +49,7 @@ class ImageEncodingException(ImageException):
             CONSTRUCTOR
         :param id:      the id of the image that is in the wrong format
         """
-        super(id)
+        super.__init__(id)
         self._msg = "The given image is not in a valid format"
 
     def __str__(self):
@@ -66,7 +66,7 @@ class ImageProcessingException(ImageException):
             CONSTRUCTOR
         :param id:      The id of the image that raised this exception
         """
-        super(id)
+        super.__init__(id)
         self._msg = "The image processor failed!"
 
     def __str__(self):

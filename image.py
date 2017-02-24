@@ -89,16 +89,6 @@ class ImageProcessor:
         """
 
         :return:    the results of the image processor, as a dictionary, with the following structure:
-
-                    {
-                        "success" : [True|False]
-                        "status" : <Status Code>
-                        "data" : {
-                            "text" : <caption>
-                            "confidence" : <confidence>
-                            "improvementTips" : list of corrections
-                        }
-                    }
         """
         result = dict()
 
