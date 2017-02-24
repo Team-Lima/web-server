@@ -1,12 +1,7 @@
 import PIL
-from PIL import Image, ImageFilter
-import os
-import io
-
-from matplotlib.pyplot import imshow
-import numpy as np
 from PIL import Image
-
+import numpy as np
+import cv2
 
 '''Returns the brightness ratio: 1 means completely white, 0 means completely black'''
 def get_darkness_ratio (im):
@@ -16,14 +11,25 @@ def get_darkness_ratio (im):
     ratio = (r+g+b)/(255*3.0) # determining the ratio
     return ratio
 
-
-import cv2
+'''Returns variance of laplacian - used to determine blurryness'''
 def variance_of_laplacian(image):
 	# compute the Laplacian of the image and then return the focus
 	# measure, which is simply the variance of the Laplacian
 	return cv2.Laplacian(image, cv2.CV_64F).var()
 
+'''Returns boolean: is the image blurry?'''
+def is_blurry(image):
+    pil_image = image.convert('RGB')
+    cv_image = np.array(pil_image)
+    # Convert RGB to BGR
+    cv_image = cv_image[:, :, ::-1].copy()
+    return variance_of_laplacian(cv_image) < 100
 
+'''Returns boolean: is the image dark?'''
+def is_dark(image):
+    return get_darkness_ratio(image) < 0.3
+
+'''Displays image. Used for testing.'''
 def display(img):
     screen_res = 1280, 720
     scale_width = screen_res[0] / img.shape[1]
@@ -39,19 +45,13 @@ def display(img):
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
+'''Returns list of image problems.'''
 def image_problems(image):
     list = []
-    if get_darkness_ratio(image) < 0.3:
+    if is_dark(image):
         list.append("too_dark")
-    pil_image = image.convert('RGB')
-    cv_image = np.array(pil_image)
-    # Convert RGB to BGR
-    cv_image = cv_image[:, :, ::-1].copy()
-
-    #display(cv_image)
-
-    if variance_of_laplacian(cv_image) < 100:
-        list.append("out_of_focus")
+    if is_blurry(image):
+        list.append("blurry")
     return list
 
 
