@@ -15,13 +15,13 @@ import os
 import tensorflow as tf
 
 from im2txt import configuration
+
 from im2txt import inference_wrapper
 from im2txt.inference_utils import caption_generator
 from im2txt.inference_utils import vocabulary
 
-#TODO: SET THESE UP
-CHKPNT_PATH = r"" #path to checkpoint
-VOBAB_PATH = r"" #path to the vocabulary file
+CHKPNT_PATH = r"chk_point/model.ckpt-2000000" #path to checkpoint
+VOBAB_PATH = r"word_counts.txt" #path to the vocabulary file
 
 
 def predict(img):
@@ -49,15 +49,16 @@ def predict(img):
         gen = caption_generator.CaptionGenerator(model, vocab)
 
         #Getting the resulting sentence
-        caption = gen.beam_search(
-            sess=sess,
-            img=img
-        )[0]
+        caption = gen.beam_search(sess, img)[0]
+
+
+
 
         #Getting the sentence and probability out of the caption
         prob = math.exp(caption.logprob)
 
         sentence = [vocab.id_to_word(w) for w in caption.sentence[1:-1]]
         sentence = " ".join(sentence)
-
+            
     return sentence, prob
+

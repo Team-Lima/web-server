@@ -10,7 +10,7 @@ from flask import Request
 # file for parsing JSON
 import json
 # file containing the image processing code
-import run
+import image
 
 
 # the flask application object
@@ -34,7 +34,7 @@ def caption():
         json_req = Request.json
 
         # send the data to the Neural network server
-        result = run.process_image(json_req['data'])
+        result = image.process_image(json_req['data'])
 
         js = json.dumps(result)
         resp = Response(js, status=200, mimetype="application/json")
