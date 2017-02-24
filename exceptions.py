@@ -71,3 +71,18 @@ class ImageProcessingException(ImageException):
 
     def __str__(self):
         return self._msg
+
+
+class ThreadMalfunctioningException(Exception):
+    """
+        Exception raised when a thread
+    """
+    def __init__(self):
+        """
+            CONSTRUCTOR
+        """
+        self._msg = "One of the threads failed."
+
+    def __str__(self):
+        return self._msg
+
