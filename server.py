@@ -11,10 +11,12 @@ from flask import Request
 import json
 # file containing the image processing code
 import image
+# import config
+# import auth
 
-
-# the flask application object
+# the flask application object with oauth integration
 app = Flask(__name__)
+# app.config.from_object(config.Config)
 
 """
 Version 1 of the caption generation api - will return a caption for a given processed image
@@ -33,13 +35,15 @@ def caption():
         # request from the application should be a JSON object of the form:
         json_req = Request.json
 
+        caption.counter += 1
         # send the data to the Neural network server
-        result = image.process_image(json_req['data'])
+        image_processor = image.ImageProcessor(json_req['data'], caption.counter)
 
-        js = json.dumps(result)
+        js = json.dumps(image_processor.get_result())
         resp = Response(js, status=200, mimetype="application/json")
         return resp
 
+caption.counter = 0
 
 if __name__ == "__main__":
     app.run()
