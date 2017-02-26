@@ -49,7 +49,7 @@ def display(img):
 def image_problems(image):
     list = []
     if is_dark(image):
-        list.append("too_dark")
+        list.append("dark")
     if is_blurry(image):
         list.append("blurry")
     return list
