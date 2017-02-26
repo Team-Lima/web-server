@@ -11,14 +11,17 @@ from flask import Request
 import json
 # file containing the image processing code
 import image
+# import config
+# import auth
 
-
-# the flask application object
+# the flask application object with oauth integration
 app = Flask(__name__)
+# app.config.from_object(config.Config)
 
 """
 Version 1 of the caption generation api - will return a caption for a given processed image
 """
+
 
 @app.route("/v1/caption", methods=['POST'])
 def caption():

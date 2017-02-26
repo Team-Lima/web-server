@@ -2,6 +2,7 @@
     File that declares the exceptions that are used in the server environment
 """
 
+
 class ImageException(Exception):
     """
         Base class for exceptions raised when failing while
