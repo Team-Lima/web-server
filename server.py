@@ -6,6 +6,7 @@ from flask import Flask
 from flask import Response
 from flask import json
 from flask import Request
+import server_util_functions
 
 # file for parsing JSON
 import json
@@ -33,13 +34,16 @@ def caption():
     """
     if Request.method == 'POST':
         # request from the application should be a JSON object of the form:
-        json_req = Request.json
+        # json_req = Request.json
+        #
+        # caption.counter += 1
+        # # send the data to the Neural network server
+        # image_processor = image.ImageProcessor(json_req['data'], caption.counter)
+        #
+        # js = json.dumps(image_processor.get_result())
+        # resp = Response(js, status=200, mimetype="application/json")
 
-        caption.counter += 1
-        # send the data to the Neural network server
-        image_processor = image.ImageProcessor(json_req['data'], caption.counter)
-
-        js = json.dumps(image_processor.get_result())
+        js = json.dumps(server_util_functions.caption_res(True, True, 200, "Definitely something", 0.5, []))
         resp = Response(js, status=200, mimetype="application/json")
         return resp
 
