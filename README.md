@@ -30,7 +30,7 @@ pip3 install Flask
 
 (6) _Pre-trained checkpoint for the neural network_
     <br />
-    Can be downloaded [here](https://www.dropbox.com/home/neural-guide/checkpoint)
+    Can be downloaded [here](https://www.dropbox.com/sh/ufq57ynrejm8k5o/AADVqMwnkLWkvGMymu7KSFq9a?dl=0)
     <br />
     **IMPORTANT** Once you downloaded the files, create create a new directory "im2txt/chk_point" and put them in there.
     
