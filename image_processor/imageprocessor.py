@@ -56,5 +56,5 @@ def image_problems(image):
 
 if __name__ == "__main__":
     # Testing
-    im = Image.open( 'r1.jpg' )
+    im = Image.open('r1.jpg')
     print (image_problems(im))

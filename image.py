@@ -49,7 +49,8 @@ class ImageProcessor:
         :raises ImageProcessingException:       If the image processing failed
         """
         try:
-            self._problems = ip.image_problems(img)
+            #self._problems = ip.image_problems(img)
+            self._tips = ip.image_problems(img)
         except Exception:
             # Should not be the case, but just to be safe
             self._success_faults = False
@@ -66,15 +67,18 @@ class ImageProcessor:
         try:
             # Getting the image from b64 to a 'bytes' object
             bytes_img = b64.b64decode(self._b64_img)
+            print(bytes_img)
         except:
             #Should not happen, but just to be safe
             raise ImageEncodingException(self._img_id)
 
+
         try:
             #Getting the PIL Image object out of the b64 string
-            PIL_img = Image.open(BytesIO(b64.b64decode(self._b64_img)))
+            PIL_img = Image.open(BytesIO(bytes_img))
         except:
             raise ImageEncodingException(self._img_id)
+
 
         #setting up the 2 threads
         try:
@@ -83,7 +87,8 @@ class ImageProcessor:
             will run o a separate one.
             """
             # (1) running the image processor
-            thread.start_new_thread(self._get_image_faults, (PIL_img, ) )
+            self._get_image_faults(PIL_img)
+
 
             # (2) running the neural network(i.e. caption generator)
             self._get_caption(bytes_img)
@@ -103,7 +108,7 @@ class ImageProcessor:
             "data": {
                 "text": self._caption,
                 "confidence": self._prob,
-                "improvementTips": self._problems
+                "improvementTips": self._tips
             }
         }
 

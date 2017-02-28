@@ -20,8 +20,8 @@ from im2txt import inference_wrapper
 from im2txt.inference_utils import caption_generator
 from im2txt.inference_utils import vocabulary
 
-CHKPNT_PATH = r"chk_point/model.ckpt-2000000" #path to checkpoint
-VOBAB_PATH = r"word_counts.txt" #path to the vocabulary file
+CHKPNT_PATH = r"im2txt/chk_point/model.ckpt-2000000" #path to checkpoint
+VOBAB_PATH = r"im2txt/word_counts.txt" #path to the vocabulary file
 
 
 def predict(img):
