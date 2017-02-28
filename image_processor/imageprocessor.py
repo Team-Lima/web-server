@@ -54,13 +54,7 @@ def image_problems(image):
         list.append("blurry")
     return list
 
-
-
-
-
-
-
-
-# Testing
-im = Image.open( 'r1.jpg' )
-print (image_problems(im))
+if __name__ == "__main__":
+    # Testing
+    im = Image.open('r1.jpg')
+    print (image_problems(im))

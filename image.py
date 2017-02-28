@@ -4,6 +4,7 @@ import _thread as thread
 from exceptions import *
 from PIL import Image
 from io import BytesIO
+from image_processor import imageprocessor as ip
 
 class ImageProcessor:
     """
@@ -18,6 +19,9 @@ class ImageProcessor:
         """
         self._b64_img = str(img)
         self._img_id = img_id
+
+        self._success_caption = True
+        self._success_faults = True
 
     def _get_caption(self, bytes_img):
         """
@@ -36,15 +40,17 @@ class ImageProcessor:
             self._success_caption = False
             raise NeuralNetworkFailure(self._img_id)
 
-    def _get_image_faults(self):
+    def _get_image_faults(self, img):
         """
             Inner function that calls the actual image processor and gets the feedback from it
+        :param img:                             The image to be processed, as a PIL object
+
         :return:                                -
         :raises ImageProcessingException:       If the image processing failed
         """
         try:
-            #TODO: Get the image processor integrated from Ambrus
-            print("Image processor thread")
+            #self._problems = ip.image_problems(img)
+            self._tips = ip.image_problems(img)
         except Exception:
             # Should not be the case, but just to be safe
             self._success_faults = False
@@ -61,15 +67,18 @@ class ImageProcessor:
         try:
             # Getting the image from b64 to a 'bytes' object
             bytes_img = b64.b64decode(self._b64_img)
+            print(bytes_img)
         except:
             #Should not happen, but just to be safe
             raise ImageEncodingException(self._img_id)
 
+
         try:
             #Getting the PIL Image object out of the b64 string
-            PIL_img = Image.open(BytesIO(b64.b64decode(self._b64_img)))
+            PIL_img = Image.open(BytesIO(bytes_img))
         except:
             raise ImageEncodingException(self._img_id)
+
 
         #setting up the 2 threads
         try:
@@ -78,7 +87,8 @@ class ImageProcessor:
             will run o a separate one.
             """
             # (1) running the image processor
-            thread.start_new_thread(self._get_image_faults, (PIL_img, ) )
+            self._get_image_faults(PIL_img)
+
 
             # (2) running the neural network(i.e. caption generator)
             self._get_caption(bytes_img)
@@ -98,7 +108,7 @@ class ImageProcessor:
             "data": {
                 "text": self._caption,
                 "confidence": self._prob,
-                "improvementTips": None #TODO: add this once integrated with the image processor
+                "improvementTips": self._tips
             }
         }
 
