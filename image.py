@@ -6,6 +6,7 @@ from PIL import Image
 from io import BytesIO
 from image_processor import imageprocessor as ip
 
+
 class ImageProcessor:
     """
         Class that represents the image processor
