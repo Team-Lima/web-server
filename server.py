@@ -60,8 +60,6 @@ def caption():
         except (ImageException, NeuralNetworkFailure, ImageEncodingException, ImageProcessingException, ThreadMalfunctioningException) as e:
             print(e.msg)
 
-            # TODO: return a special error JSON to the client
-
 caption.counter = 0
 
 
@@ -69,15 +67,15 @@ caption.counter = 0
 def signin():
     # (Receive token by HTTPS POST)
     token = request.form['idToken']
+    CLIENT_ID = 'http://624718567609-ja0vbu5svh6l5q79pvtnk1rn3pjrrq2d.apps.googleusercontent.com/'
     try:
-        idinfo = client.verify_id_token(token, CLIENT_ID) # TODO: need the client ID
+        idinfo = client.verify_id_token(token, CLIENT_ID)
 
         if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
             raise crypt.AppIdentityError("Wrong issuer.")
 
     except crypt.AppIdentityError:
-        # Invalid token - TODO: fail authentication
-
+        pass
     userid = idinfo['sub']
 
 
