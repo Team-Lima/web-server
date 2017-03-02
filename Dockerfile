@@ -1,19 +1,14 @@
-# out base image
-FROM ubuntu:16.04
+# get base image
+FROM congying/docker-ubuntu-python-opencv:latest
 
 #install python and pip
-RUN apk add --update py3-pip
+RUN apt-get -y update
+RUN apt-get -y upgrade
+
+RUN apt-get -y install python3 python3-pip
 
 COPY requirements.txt /usr/src/NeuralGuideServer/
 RUN pip3 install --no-cache-dir -r /usr/src/NeuralGuideServer/requirements.txt
-
-RUN ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)" PATH="$HOME/.linuxbrew/bin:$PATH"
-RUN echo 'export PATH="$HOME/.linuxbrew/bin:$PATH"' >>~/.bash_profile
-
-RUN sudo apt-get install build-essential curl git python-setuptools ruby
-RUN brew install opencv3 --with-python3 --with-contrib
-RUN echo 'export PYTHONPATH=$PYTHONPATH:/usr/local/Cellar/opencv3/3.0.0/lib/python3.4/site-packages' >>~/.profile
-RUN source ~/.profile
 
 COPY server.py /usr/src/NeuralGuideServer/
 COPY image.py /usr/src/NeuralGuideServer/
@@ -26,10 +21,12 @@ COPY server_util_functions.py /usr/src/NeuralGuideServer/
 COPY image_processor /usr/src/NeuralGuideServer/image_processor
 COPY im2txt /usr/src/NeuralGuideServer/im2txt
 
-COPY dependencies /usr/src/NeuralGuideServer/dependencies
-
-RUN sudo pip3 install /usr/src/NeuralGuideServer/dependencies/tensorflow-0.12.0-py3-none-any.whl
+RUN mkdir /usr/src/NeuralGuideServer/im2txt/chk_point/
+RUN cd /usr/src/NeuralGuideServer/im2txt/chk_point/
+RUN wget -O graph.pbtxt https://dl.dropboxusercontent.com/s/u84fgiorxn1zlqe/graph.pbtxt?dl=0
+RUN wget -O model.ckpt-2000000 https://dl.dropboxusercontent.com/s/okbsfriqi2p03s4/model.ckpt-2000000?dl=0
+RUN wget -O model.ckpt-2000000.meta https://dl.dropboxusercontent.com/s/l9sboeglrg2bv0w/model.ckpt-2000000.meta?dl=0 
 
 EXPOSE 5000
 
-CMD ["python", "/usr/src/NeuralGuideServer/server.py"]
+CMD ["python3", "/usr/src/NeuralGuideServer/server.py"]
