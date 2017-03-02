@@ -1,45 +1,39 @@
-"""
-server.py implements the server interface layer between the android client and the Neural network
-"""
-
-import flask
-from flask import Response
-from flask import json
-from flask import Request
-from exceptions import *
-import server_util_functions
-
-from oauth2client import client
-import httplib2
-import json
+from flask import Flask, jsonify, request, Response
 import image
+import json
+from exceptions import *
+from oauth2client import client, crypt
+
+app = Flask(__name__)
+
+test_dict = {
+    "test": "test",
+    "more_test": {
+        "inner-test": "mini-test"
+    }
+}
 
 
-# the flask application object with oauth integration
-app = flask.Flask(__name__)
-
-"""
-Version 1 of the caption generation api - will return a caption for a given processed image
-"""
+@app.route("/")
+def index():
+    print("I'm in!")
 
 
-@app.route('/oauth2callback')
-def oauth2callback():
-    flow = client.flow_from_clientsecrets(
-        # TODO: Will need to supply a client_secrets.json file containing the client_id and secret_id
-        'client_secrets.json',
-        # TODO: add the uris for Google apis in use
-        scope='',
-        redirect_uri=flask.url_for('oauth2callback', _external=True),
-        include_granted_scopes=True)
-    if 'code' not in flask.request.args:
-        auth_uri = flow.step1_get_authorize_url()
-        return flask.redirect(auth_uri)
-    else:
-        auth_code = flask.request.args.get('code')
-        credentials = flow.step2_exchange(auth_code)
-        flask.session['credentials'] = credentials.to_json()
-        return flask.redirect(flask.url_for('caption'))
+@app.route("/getjson", methods=["POST","GET"])
+def get_json():
+    print("Received a request!")
+    if request.method == "POST":
+        print("It is a POST request!!")
+
+        if request.is_json:
+            print("It is a JSON !!!")
+            # print("The data is: ", request.json)
+            data = request.json
+            print(type(data))
+        else:
+            abort(400)
+
+        return jsonify(test_dict)
 
 
 @app.route("/v1/caption", methods=['POST'])
@@ -50,40 +44,42 @@ def caption():
 
     :return: The JSON response formatted from the dictionary returned in process_image
     """
-    if Request.method == 'POST':
-        if 'credentials' not in flask.session:
-            return flask.redirect(flask.url_for('oauth2callback'))
-        credentials = client.OAuth2Credentials.from_json(flask.session['credentials'])
-        if credentials.access_token_expired:
-            return flask.redirect(flask.url_for('oauth2callback'))
-        else:
-            http_auth = credentials.authorize(httplib2.Http())
-            # request from the application should be a JSON object of the form:
-            json_req = Request.json
+    if request.method == 'POST':
+        # request from the application should be a JSON object of the form:
+        json_req = request.json
 
-            caption.counter += 1
-            # send the data to the Neural network server
-            try:
-                image_processor = image.ImageProcessor(json_req['data'], caption.counter)
+        caption.counter += 1
+        # send the data to the Neural network server
+        try:
+            image_processor = image.ImageProcessor(json_req['data'], caption.counter)
 
-                js = json.dumps(image_processor.get_result())
-                resp = Response(js, status=200, mimetype="application/json")
-                return resp
-            except (ImageException, NeuralNetworkFailure, ImageEncodingException, ImageProcessingException, ThreadMalfunctioningException):
-                # TODO: send back failure response to the client
-                pass
+            js = json.dumps(image_processor.get_result())
+            resp = Response(js, status=200, mimetype="application/json")
 
-            # js = json.dumps(server_util_functions.caption_res(True, True, 200, "Definitely something", 0.5, []))
-            # resp = Response(js, status=200, mimetype="application/json")
-            # return resp
+            return resp
+        except (ImageException, NeuralNetworkFailure, ImageEncodingException, ImageProcessingException, ThreadMalfunctioningException) as e:
+            print(e.msg)
+
+            # TODO: return a special error JSON to the client
 
 caption.counter = 0
 
+
+@app.route("/signin")
+def signin():
+    # (Receive token by HTTPS POST)
+    token = request.form['idToken']
+    try:
+        idinfo = client.verify_id_token(token, CLIENT_ID) # TODO: need the client ID
+
+        if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+            raise crypt.AppIdentityError("Wrong issuer.")
+
+    except crypt.AppIdentityError:
+        # Invalid token - TODO: fail authentication
+
+    userid = idinfo['sub']
+
+
 if __name__ == "__main__":
-    import uuid
-    app.secret_key = str(uuid.uuid4())
-    app.debug = False
     app.run()
-
-
-
