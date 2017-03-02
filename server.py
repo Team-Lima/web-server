@@ -1,56 +1,65 @@
-"""
-server.py implements the server interface layer between the android client and the Neural network
-"""
+from flask import Flask, jsonify, request
+from image import ImageProcessor
 
-from flask import Flask
-from flask import Response
-from flask import json
-from flask import Request
-import server_util_functions
-
-# file for parsing JSON
-import json
-# file containing the image processing code
-import image
-# import config
-# import auth
-
-# the flask application object with oauth integration
 app = Flask(__name__)
-# app.config.from_object(config.Config)
 
-"""
-Version 1 of the caption generation api - will return a caption for a given processed image
-"""
+test_dict = {
+    "test": "test",
+    "more_test": {
+        "inner-test": "mini-test"
+    }
+}
+
+@app.route("/")
+def index():
+    print("I'm in!")
 
 
-@app.route("/v1/caption", methods=['POST'])
-def caption():
+@app.route("/v1/caption", methods=["POST","GET"])
+def get_json():
+    print("Received a request!")
+    if request.method == "POST":
+        print("It is a POST request!!")
+
+        if request.is_json:
+            print("It is a JSON !!!")
+            #print("The data is: ", request.json)
+            data = request.json
+            if len(data) != 1 or (not "data" in data):
+                print("Wrong JSON format")
+                abort(400)
+            else:
+                print("Starting to run the image processor")
+                result = run_image_processor(
+                    img_b64=data["data"]
+                )
+                print("Successfully ran the image processor")
+                return jsonify(result)
+
+        else:
+            print("Not a JSON")
+            abort(400)
+
+
+def run_image_processor(img_b64):
     """
-    function which is called by the HTTP POST request sent in by the client which returns a JSON string representing
-    the classification result from the Neural Network
-
-    :return: The JSON response formatted from the dictionary returned in process_image
+        Function that takes the b64 version of the image, creates a new ImageProcessor object and returns
+        the result of the image processing (i.e. the caption and improvement tips
+    :param img_b64:     The image as a b64 string
+    :return:            The results of the image processing
     """
-    if Request.method == 'POST':
-        # request from the application should be a JSON object of the form:
-        # json_req = Request.json
-        #
-        # caption.counter += 1
-        # # send the data to the Neural network server
-        # image_processor = image.ImageProcessor(json_req['data'], caption.counter)
-        #
-        # js = json.dumps(image_processor.get_result())
-        # resp = Response(js, status=200, mimetype="application/json")
+    imageProcessor = ImageProcessor(
+        img_id=0,
+        img=img_b64
+    )
 
-        js = json.dumps(server_util_functions.caption_res(True, True, 200, "Definitely something", 0.5, []))
-        resp = Response(js, status=200, mimetype="application/json")
-        return resp
+    try:
+        imageProcessor.run()
+    except:
+        print("ERROR while processing the image")
 
-caption.counter = 0
+    return imageProcessor.get_result()
 
 if __name__ == "__main__":
-    app.run()
-
-
-
+    app.run(port=80,
+            debug=True)

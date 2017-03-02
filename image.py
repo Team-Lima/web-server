@@ -22,6 +22,9 @@ class ImageProcessor:
 
         self._success_caption = True
         self._success_faults = True
+        self._caption = None
+        self._prob = None
+        self._tips = None
 
     def _get_caption(self, bytes_img):
         """
@@ -67,7 +70,6 @@ class ImageProcessor:
         try:
             # Getting the image from b64 to a 'bytes' object
             bytes_img = b64.b64decode(self._b64_img)
-            print(bytes_img)
         except:
             #Should not happen, but just to be safe
             raise ImageEncodingException(self._img_id)
