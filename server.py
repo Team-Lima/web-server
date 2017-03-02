@@ -15,7 +15,7 @@ def index():
     print("I'm in!")
 
 
-@app.route("/getjson", methods=["POST","GET"])
+@app.route("/v1/caption", methods=["POST","GET"])
 def get_json():
     print("Received a request!")
     if request.method == "POST":
