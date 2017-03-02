@@ -1,56 +1,34 @@
-"""
-server.py implements the server interface layer between the android client and the Neural network
-"""
+from flask import Flask, jsonify, request
 
-from flask import Flask
-from flask import Response
-from flask import json
-from flask import Request
-import server_util_functions
-
-# file for parsing JSON
-import json
-# file containing the image processing code
-import image
-# import config
-# import auth
-
-# the flask application object with oauth integration
 app = Flask(__name__)
-# app.config.from_object(config.Config)
 
-"""
-Version 1 of the caption generation api - will return a caption for a given processed image
-"""
+test_dict = {
+    "test": "test",
+    "more_test": {
+        "inner-test": "mini-test"
+    }
+}
+
+@app.route("/")
+def index():
+    print("I'm in!")
 
 
-@app.route("/v1/caption", methods=['POST'])
-def caption():
-    """
-    function which is called by the HTTP POST request sent in by the client which returns a JSON string representing
-    the classification result from the Neural Network
+@app.route("/getjson", methods=["POST","GET"])
+def get_json():
+    print("Received a request!")
+    if request.method == "POST":
+        print("It is a POST request!!")
 
-    :return: The JSON response formatted from the dictionary returned in process_image
-    """
-    if Request.method == 'POST':
-        # request from the application should be a JSON object of the form:
-        # json_req = Request.json
-        #
-        # caption.counter += 1
-        # # send the data to the Neural network server
-        # image_processor = image.ImageProcessor(json_req['data'], caption.counter)
-        #
-        # js = json.dumps(image_processor.get_result())
-        # resp = Response(js, status=200, mimetype="application/json")
+        if request.is_json:
+            print("It is a JSON !!!")
+            #print("The data is: ", request.json)
+            data = request.json
+            print(type(data))
+        else:
+            abort(400)
 
-        js = json.dumps(server_util_functions.caption_res(True, True, 200, "Definitely something", 0.5, []))
-        resp = Response(js, status=200, mimetype="application/json")
-        return resp
-
-caption.counter = 0
+        return jsonify(test_dict)
 
 if __name__ == "__main__":
-    app.run()
-
-
-
+    app.run(debug=True)
