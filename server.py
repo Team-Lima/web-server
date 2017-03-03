@@ -3,18 +3,6 @@ from image import ImageProcessor
 
 app = Flask(__name__)
 
-test_dict = {
-    "test": "test",
-    "more_test": {
-        "inner-test": "mini-test"
-    }
-}
-
-@app.route("/")
-def index():
-    print("I'm in!")
-
-
 @app.route("/v1/caption", methods=["POST"])
 def get_json():
     print("Received a request!")
