@@ -23,9 +23,9 @@ COPY im2txt /usr/src/NeuralGuideServer/im2txt
 
 RUN mkdir /usr/src/NeuralGuideServer/im2txt/chk_point/
 RUN cd /usr/src/NeuralGuideServer/im2txt/chk_point/
-RUN wget -O graph.pbtxt https://dl.dropboxusercontent.com/s/u84fgiorxn1zlqe/graph.pbtxt?dl=0
-RUN wget -O model.ckpt-2000000 https://dl.dropboxusercontent.com/s/okbsfriqi2p03s4/model.ckpt-2000000?dl=0
-RUN wget -O model.ckpt-2000000.meta https://dl.dropboxusercontent.com/s/l9sboeglrg2bv0w/model.ckpt-2000000.meta?dl=0 
+RUN wget -O /usr/src/NeuralGuideServer/im2txt/chk_point/graph.pbtxt https://dl.dropboxusercontent.com/s/u84fgiorxn1zlqe/graph.pbtxt?dl=0
+RUN wget -O /usr/src/NeuralGuideServer/im2txt/chk_point/model.ckpt-2000000 https://dl.dropboxusercontent.com/s/okbsfriqi2p03s4/model.ckpt-2000000?dl=0
+RUN wget -O /usr/src/NeuralGuideServer/im2txt/chk_point/model.ckpt-2000000.meta https://dl.dropboxusercontent.com/s/l9sboeglrg2bv0w/model.ckpt-2000000.meta?dl=0 
 
 EXPOSE 5000
 

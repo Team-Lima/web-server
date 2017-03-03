@@ -22,7 +22,7 @@ def get_b64(filename):
 
 
 def post_request(output):
-    myurl = "http://localhost:80/getjson"
+    myurl = "http://localhost:5000/v1/caption"
 
     print("Initialising request")
 

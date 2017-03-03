@@ -15,7 +15,7 @@ def index():
     print("I'm in!")
 
 
-@app.route("/v1/caption", methods=["POST","GET"])
+@app.route("/v1/caption", methods=["POST"])
 def get_json():
     print("Received a request!")
     if request.method == "POST":
@@ -61,5 +61,4 @@ def run_image_processor(img_b64):
     return imageProcessor.get_result()
 
 if __name__ == "__main__":
-    app.run(port=80,
-            debug=True)
+    app.run(debug=True)
