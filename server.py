@@ -46,7 +46,9 @@ def run_image_processor(img_b64):
     except:
         print("ERROR while processing the image")
 
-    return imageProcessor.get_result()
+    result = imageProcessor.get_result()
+    print(result)
+    return result	
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0",port=8000,debug=True)
