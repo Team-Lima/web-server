@@ -23,7 +23,7 @@ def is_blurry(image):
     cv_image = np.array(pil_image)
     # Convert RGB to BGR
     cv_image = cv_image[:, :, ::-1].copy()
-    return variance_of_laplacian(cv_image) < 100
+    return variance_of_laplacian(cv_image) < 60
 
 '''Returns boolean: is the image dark?'''
 def is_dark(image):
@@ -53,6 +53,9 @@ def image_problems(image):
     if is_blurry(image):
         list.append("blurry")
     return list
+
+
+
 
 if __name__ == "__main__":
     # Testing
