@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from image import ImageProcessor
 import pandas as pd
 from datetime import datetime as dt
+from oauth2client import client, crypt
 
 app = Flask(__name__)
 
@@ -80,6 +81,22 @@ def save_log(data):
     new_df = pd.DataFrame(data=data, columns=columns)
     df = df.append(new_df)
     df.to_csv("tests/log.csv", index=False)
+    
+@app.route("/signin")
+def signin():
+    # (Receive token by HTTPS POST)
+    token = request.form['idToken']
+    CLIENT_ID = 'http://624718567609-ja0vbu5svh6l5q79pvtnk1rn3pjrrq2d.apps.googleusercontent.com/'
+    try:
+        idinfo = client.verify_id_token(token, CLIENT_ID)
+
+        if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+            raise crypt.AppIdentityError("Wrong issuer.")
+
+    except crypt.AppIdentityError:
+        pass
+    userid = idinfo['sub']
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0",port=8000,debug=True)
