@@ -29,7 +29,7 @@ def get_json():
             data = request.json
             if len(data) != 1 or (not "data" in data):
                 print("Wrong JSON format")
-                abort(400)
+                return Response(response='JSON in wrong format', status=400)
             else:
                 print("Starting to run the image processor")
                 result = run_image_processor(
@@ -40,8 +40,7 @@ def get_json():
 
         else:
             print("Not a JSON")
-            abort(400)
-
+            return Response(response='Expected JSON', status=400)	
 
 def run_image_processor(img_b64):
     """
@@ -88,13 +87,14 @@ def signin():
     print("Got a OAuth request")
     token = request.form['idToken']
     CLIENT_ID = '624718567609-ja0vbu5svh6l5q79pvtnk1rn3pjrrq2d.apps.googleusercontent.com'
-    idinfo = client.verify_id_token(token, CLIENT_ID)
-    print("HERE IT IS :")	
-    print(idinfo['iss']) 
-    print("\n")
-    if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
-        raise crypt.AppIdentityError("Wrong issuer.")
-    print("Successful") 
+    try:	
+        idinfo = client.verify_id_token(token, CLIENT_ID)
+
+        if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+            raise crypt.AppIdentityError("Wrong issuer.")
+        print("Successful") 
+    except:
+        return Response(response='Wrong user.', status=401)
     userid = idinfo['sub']
     return Response(response=userid, status=200)
 

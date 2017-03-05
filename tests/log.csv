@@ -23,3 +23,10 @@ date,success,caption,confidence,dark,blurry
 2017-03-05 18:59:31.159755,True,a close up of a cell phone on a table,0.0010210879688043013,False,True
 2017-03-05 19:04:26.459156,True,a man sitting at a table with a laptop computer .,0.0010151268941284066,False,True
 2017-03-05 20:07:21.085228,True,two men sitting at a table with a laptop .,0.0003227593218742254,False,True
+2017-03-05 20:19:08.933921,True,a white toilet sitting next to a white toilet .,0.001550030919590906,False,True
+2017-03-05 20:20:04.053184,True,a man is taking a picture of himself in the bathroom .,0.0005984171438774412,False,True
+2017-03-05 20:25:54.229766,False,a pair of scissors sitting on top of a table .,3.49006590175727e-05,False,False
+2017-03-05 20:27:16.326988,True,a laptop computer sitting on top of a wooden desk .,0.012780932125184951,True,False
+2017-03-05 20:27:32.515040,True,a kitchen with a stove and a sink,0.00016630856086459903,False,False
+2017-03-05 20:28:02.310606,True,a bottle of beer next to a hot dog .,0.00036094153166813415,False,True
+2017-03-05 20:28:26.029295,True,a close up of a person holding a pair of scissors,0.0008729656380125263,False,True
