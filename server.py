@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, Response
 from image import ImageProcessor
 import pandas as pd
 from datetime import datetime as dt
@@ -94,8 +94,9 @@ def signin():
             raise crypt.AppIdentityError("Wrong issuer.")
 
     except crypt.AppIdentityError:
-        pass
+        return Response(response="unable to authenticate user", status=401)
     userid = idinfo['sub']
+    return Response(response=userid, status=200)
 
 
 if __name__ == "__main__":
