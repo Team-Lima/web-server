@@ -82,19 +82,19 @@ def save_log(data):
     df = df.append(new_df)
     df.to_csv("tests/log.csv", index=False)
     
-@app.route("/signin")
+@app.route("/signin", methods=["POST"])
 def signin():
     # (Receive token by HTTPS POST)
+    print("Got a OAuth request")
     token = request.form['idToken']
-    CLIENT_ID = 'http://624718567609-ja0vbu5svh6l5q79pvtnk1rn3pjrrq2d.apps.googleusercontent.com/'
-    try:
-        idinfo = client.verify_id_token(token, CLIENT_ID)
-
-        if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
-            raise crypt.AppIdentityError("Wrong issuer.")
-
-    except crypt.AppIdentityError:
-        return Response(response="unable to authenticate user", status=401)
+    CLIENT_ID = '624718567609-ja0vbu5svh6l5q79pvtnk1rn3pjrrq2d.apps.googleusercontent.com'
+    idinfo = client.verify_id_token(token, CLIENT_ID)
+    print("HERE IT IS :")	
+    print(idinfo['iss']) 
+    print("\n")
+    if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+        raise crypt.AppIdentityError("Wrong issuer.")
+    print("Successful") 
     userid = idinfo['sub']
     return Response(response=userid, status=200)
 

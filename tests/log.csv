@@ -12,4 +12,14 @@ date,success,caption,confidence,dark,blurry
 2017-03-04 20:50:54.051829,True,a slice of pizza sitting on top of a white plate .,0.004982059570010134,True,True
 2017-03-04 20:51:15.016678,False,a woman holding a teddy bear in front of her face .,7.162203744233443e-06,False,True
 2017-03-04 20:51:46.270199,False,a young girl is eating a donut with sprinkles .,2.609450645985617e-05,False,True
-2017-03-04 20:52:05.057948,False,a teddy bear is dressed in a white shirt and tie .,1.1833246926798517e-06,False,False
+2017-03-04 20:52:05.057948,False,a teddy bear is dressed in a white shirt and tie .,1.1833246926798515e-06,False,False
+2017-03-05 14:29:24.477722,True,a close up of a cell phone on a table,0.0010210879688043013,False,True
+2017-03-05 15:25:21.141971,False,a display case in a store filled with lots of donuts .,2.8493961813001893e-05,False,False
+2017-03-05 15:26:15.726445,True,a man sitting in front of a laptop computer .,0.008479661562145559,False,False
+2017-03-05 15:26:53.715628,True,a woman talking on a cell phone while sitting on a bench .,0.0007431630262040363,True,False
+2017-03-05 15:27:47.848119,True,a man sitting on a wooden bench talking on a cell phone .,0.0007245421226148569,False,False
+2017-03-05 15:28:15.076253,True,a pair of shoes on a skateboard .,0.00044800692103790136,False,False
+2017-03-05 15:28:36.466333,True,a woman holding a bunch of ripe bananas .,0.0006050641001509393,False,True
+2017-03-05 18:59:31.159755,True,a close up of a cell phone on a table,0.0010210879688043013,False,True
+2017-03-05 19:04:26.459156,True,a man sitting at a table with a laptop computer .,0.0010151268941284066,False,True
+2017-03-05 20:07:21.085228,True,two men sitting at a table with a laptop .,0.0003227593218742254,False,True
