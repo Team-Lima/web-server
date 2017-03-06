@@ -28,5 +28,65 @@ date,success,caption,confidence,dark,blurry
 2017-03-05 20:25:54.229766,False,a pair of scissors sitting on top of a table .,3.49006590175727e-05,False,False
 2017-03-05 20:27:16.326988,True,a laptop computer sitting on top of a wooden desk .,0.012780932125184951,True,False
 2017-03-05 20:27:32.515040,True,a kitchen with a stove and a sink,0.00016630856086459903,False,False
-2017-03-05 20:28:02.310606,True,a bottle of beer next to a hot dog .,0.00036094153166813415,False,True
-2017-03-05 20:28:26.029295,True,a close up of a person holding a pair of scissors,0.0008729656380125263,False,True
+2017-03-05 20:28:02.310606,True,a bottle of beer next to a hot dog .,0.0003609415316681342,False,True
+2017-03-05 20:28:26.029295,True,a close up of a person holding a pair of scissors,0.0008729656380125262,False,True
+2017-03-05 20:56:08.649318,False,a street corner with a stop sign and street lights .,5.05333351310105e-06,True,False
+2017-03-05 21:44:03.036329,False,a cat sitting on the floor next to a microwave .,4.819645926998287e-06,False,True
+2017-03-05 21:44:28.037349,False,a black and white photo of a person holding a laptop .,6.2904674691383025e-06,True,True
+2017-03-05 21:45:05.319897,True,a bottle of wine sitting on top of a wooden table .,0.0003135770182004258,False,True
+2017-03-05 21:49:19.775617,True,a laptop computer sitting on top of a wooden table .,0.017279809141068636,False,True
+2017-03-05 21:49:46.291036,True,a laptop computer sitting on top of a wooden desk .,0.013347392320050337,False,False
+2017-03-05 21:54:22.424592,True,a bottle of alcohol sitting on top of a wooden table .,0.0004831498617018534,False,True
+2017-03-05 21:54:48.238104,True,a bottle of wine sitting next to a laptop computer .,0.00034426725693896825,False,True
+2017-03-05 21:55:06.640366,True,a laptop computer sitting on top of a table .,0.010177470169537978,True,False
+2017-03-05 21:55:27.578575,True,a laptop computer sitting on top of a wooden desk .,0.004558358941417762,False,True
+2017-03-05 21:55:47.985755,True,a laptop computer sitting on top of a wooden table .,0.003115050622548573,False,True
+2017-03-05 21:56:08.712888,True,a man sitting in a chair in front of a window .,0.0004884391302860585,False,True
+2017-03-05 21:56:26.406837,True,a laptop computer sitting on top of a desk .,0.002508048341814697,False,True
+2017-03-05 21:56:46.065801,True,a laptop computer sitting on top of a desk .,0.00926282029070885,False,False
+2017-03-05 21:57:01.858793,True,a laptop computer sitting on top of a table .,0.011809855412210477,True,False
+2017-03-05 21:57:21.031055,False,a close up of a small bird on a wire,4.2668408468739795e-05,False,True
+2017-03-05 22:00:31.222599,True,a laptop computer sitting on top of a table .,0.010429150988909236,True,False
+2017-03-05 22:01:04.038948,True,a laptop computer sitting on top of a wooden table .,0.013546827651162179,True,True
+2017-03-05 22:01:29.654620,True,a laptop computer sitting on top of a wooden table .,0.009110450424904794,False,False
+2017-03-05 22:01:48.747930,False,a close up of a person holding a pair of scissors,2.10349094072264e-05,False,True
+2017-03-05 22:02:19.327215,False,a close up of a person holding a pair of scissors,1.999961853126055e-05,False,True
+2017-03-05 22:02:46.273329,False,a close up of a person on a laptop,2.1008144250693028e-05,False,True
+2017-03-05 22:03:06.068717,False,a black and white photo of a tv,8.326100581645672e-05,False,True
+2017-03-05 22:03:25.426566,False,a close up of a black and white photo .,4.095464257735784e-05,False,True
+2017-03-05 22:03:45.309474,False,a close up of a person on a laptop,1.029701382670377e-05,False,True
+2017-03-05 22:04:17.371499,False,a close up of a black and white photo of a light .,1.7966433143314977e-06,False,True
+2017-03-05 22:04:38.159774,False,a close up of a black and white background,9.840982705281462e-06,False,True
+2017-03-05 22:05:07.834986,False,a close up of a person holding a remote,1.3623671034282788e-05,False,True
+2017-03-05 22:05:26.819539,False,a close up of a person on a laptop,1.5756336742624853e-05,False,True
+2017-03-05 22:05:43.634655,False,a close up of a person on a laptop,1.991320007522124e-05,False,True
+2017-03-05 22:05:56.127171,False,a red and white kite flying in the sky .,3.717707910866355e-05,False,True
+2017-03-05 22:06:14.594246,False,a close up of a black and white background,1.5299287103597566e-05,False,True
+2017-03-05 22:06:39.146133,False,a close up of a black and white background,2.9050264743380553e-05,False,True
+2017-03-05 22:06:59.249762,False,a close up of a person on a laptop,9.021930202619173e-06,False,True
+2017-03-05 22:15:30.114142,False,a close up of a person holding a pair of scissors,2.865869371014293e-05,False,True
+2017-03-05 22:16:10.167747,False,a close up of a person holding a pair of scissors,2.1920802380600398e-05,False,True
+2017-03-05 22:18:09.268071,False,a close up of a person holding a nintendo wii remote,9.509659398315021e-05,True,True
+2017-03-05 22:18:21.449702,True,a close up of a person holding an apple,0.0007637082947379571,True,True
+2017-03-05 22:18:34.031682,True,a close up of a person on a skateboard,0.0005355086511811773,False,True
+2017-03-05 23:59:33.504382,False,a living room with a couch and a table,2.00952110513928e-05,True,False
+2017-03-06 00:00:21.649511,True,a person holding a cell phone in their hand .,0.006626283724411539,True,True
+2017-03-06 00:01:06.867812,False,a train station with a train on the tracks .,1.3392476483996934e-05,True,False
+2017-03-06 00:07:08.994548,True,a man sitting in front of a laptop computer .,0.014882484829910909,True,True
+2017-03-06 00:07:34.999508,False,"a bedroom with a bed , a dresser and a window .",1.248952729794403e-05,False,True
+2017-03-06 00:08:03.473152,True,a bowl of oranges sitting on a table .,0.0009757934801375527,True,True
+2017-03-06 00:08:54.996726,True,a person sitting on a skateboard in a room .,0.00011334157568212195,True,True
+2017-03-06 09:02:21.398271,True,a computer keyboard sitting on top of a wooden desk .,0.005879033293348991,False,True
+2017-03-06 09:02:34.774924,True,a close up of a keyboard and a mouse,0.003085743460212563,False,False
+2017-03-06 09:02:46.185690,False,a view from the window of a train .,5.145544296238888e-05,False,False
+2017-03-06 09:03:03.080205,False,a large building that has a clock on it,9.627274808892104e-05,False,False
+2017-03-06 09:03:21.143672,False,a view of a city from the side of a building .,5.160472464264486e-06,False,False
+2017-03-06 09:03:32.413178,True,a computer monitor sitting on top of a desk .,0.0015056146289058336,False,True
+2017-03-06 09:04:12.151446,False,a tree in the middle of a forest .,5.08375265683659e-05,False,False
+2017-03-06 09:04:30.416257,True,a living room filled with furniture and a fire place .,0.0016562227542197116,False,False
+2017-03-06 09:05:03.887729,True,a laptop computer sitting on top of a table .,0.000571620856159184,False,False
+2017-03-06 11:35:23.339830,True,a desktop computer sitting on top of a wooden desk .,0.00939780747683392,False,False
+2017-03-06 11:37:20.762456,True,a computer mouse sitting next to a keyboard .,0.005259140190221922,False,True
+2017-03-06 11:38:10.849319,True,a desktop computer sitting on top of a desk .,0.015402906244559941,False,False
+2017-03-06 11:38:25.718738,True,a computer keyboard sitting on top of a desk .,0.004697016235530253,False,False
+2017-03-06 11:38:43.037399,True,a group of people sitting around a living room .,0.0007234413021827755,False,False
