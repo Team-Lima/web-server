@@ -40,8 +40,6 @@ class ImageProcessor:
 
             # running the nn
             self._caption, self._prob = nn_run.predict(bytes_img)
-            if self._prob < self._limit:
-               self._success_caption = False
         except Exception:
             # Should not be the case, but just to be safe
             self._success_caption = False
@@ -114,7 +112,8 @@ class ImageProcessor:
             "data": {
                 "text": self._caption,
                 "confidence": self._prob,
-                "improvementTips": self._tips
+                "improvementTips": self._tips,
+		"classificationSuccess": self._prob >= self._limit
             }
         }
 
